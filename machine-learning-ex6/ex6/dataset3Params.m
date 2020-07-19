@@ -30,18 +30,16 @@ errs = Inf(64,1);
 %        mean(double(predictions ~= yval))
 %
 
-%for i = 1:size(s,1)
-%    p = s(i,:);
-%    model= svmTrain(X, y, p(1), @(x1, x2) gaussianKernel(x1, x2, p(2)));
-%    predictions = svmPredict(model, Xval);
-%    errs(i) = mean(double(predictions ~= yval));
-%endfor
+for i = 1:size(s,1)
+    p = s(i,:);
+    model= svmTrain(X, y, p(1), @(x1, x2) gaussianKernel(x1, x2, p(2)));
+    predictions = svmPredict(model, Xval);
+    errs(i) = mean(double(predictions ~= yval));
+endfor
 
-%[v , j] = min(errs);
-%C = s(j, 1);
-%sigma = s(j, 2);
+[v , j] = min(errs);
+C = s(j, 1);
+sigma = s(j, 2);
 % =========================================================================
 
-C = 1;
-sigma = 0.1;
 end
